@@ -197,7 +197,7 @@ factorial(n -1)의 리턴값을 n과 곱한다. 리넡하기 전 마지막 연�
 
 ```
 function factorial: (n: integer, acc: integer) -> (integer)
-	if n = 1
+    if n = 1
         return acc
     end
     return factorial(n - 1, acc * n)    

@@ -34,7 +34,7 @@ Examples of side effects
 
 ```
 function add: (a: integer, b: integer) -> (integer)
-return a + b
+    return a + b
 end
 
 c: integer = add(3, 5)
@@ -46,9 +46,9 @@ The above function satisfies both properties, making it a pure function.
 
 ```
 function add: (a: integer, b: integer) -> (integer)
-x: integer = a + b
-display(x) // 8
-return x
+    x: integer = a + b
+    display(x) // 8
+    return x
 end
 
 c: integer = add(3, 5)
@@ -61,9 +61,9 @@ The above function is impure and has a side effect: it outputs the value to an e
 count: integer = 0
 
 function add: (a: integer, b: integer) -> (integer)
-x: integer = a + b
-count = count + 1
-return x
+    x: integer = a + b
+    count = count + 1
+    return x
 end
 
 c: integer = add(3, 5)
@@ -76,7 +76,7 @@ The above function reads and writes the value of a mutable shared variable. It d
 m: integer = 2
 
 function add: (a: integer, b: integer) -> (integer)
-return a + b + m
+    return a + b + m
 end
 
 c: integer = add(3, 5)
@@ -93,8 +93,8 @@ The above function has no side effects. However, since it reads the value of a m
 m: integer = 2
 
 function add: (a: integer, b: integer) -> (integer)
-x: integer = b + m
-return a + b
+    x: integer = b + m
+    return a + b
 end
 
 c: integer = add(3, 5)
@@ -114,7 +114,7 @@ Pure functions and immutable variables are not directly related, except that the
 
 ```
 function sum: (n: integer) -> (integer)
-return n + sum(n - 1)
+    return n + sum(n - 1)
 end
 
 ```
@@ -122,11 +122,11 @@ This is a traditional functional implementation of pure functions using recursiv
 
 ```
 function sum: (n: integer) -> (integer)
-s: integer = 0
-foreach i in [1, n]
-s = s + i
-end
-return s
+    s: integer = 0
+    foreach i in [1, n]
+        s = s + i
+    end
+    return s
 end
 ```
 This is an imperative implementation of pure functions. It satisfies both properties of a pure function.
@@ -138,25 +138,25 @@ Let's delve deeper, keeping in mind that even imperative code within a pure func
 function concatenate: (a: string, b: string) -> (string)
 
 function concatenate: (array: string[], index: int) -> (string)
-if index = array.length
-return ""
-end
-return concatenate(array[index], concatenate(array, index + 1))
+    if index = array.length
+        return ""
+    end
+    return concatenate(array[index], concatenate(array, index + 1))
 end
 
 function concatenate: (array: string[]) -> (string)
-return concatenate(array, 0)
+    return concatenate(array, 0)
 end
 ```
 This is a pure function that concatenates strings, written in a purely functional manner. All variables are immutable.
 
 ```
 function concatenate: (array: string[]) -> (string)
-stringBuffer: StringBuffer = StringBuffer()
-foreach element in array
-stringBuffer.Append(element)
-end
-return stringBuffer.ToString()
+    stringBuffer: StringBuffer = StringBuffer()
+    foreach element in array
+        stringBuffer.Append(element)
+    end
+    return stringBuffer.ToString()
 end
 
 ```
@@ -186,10 +186,10 @@ Pure functional implementations are generally recommended, but if the function i
 
 ```
 function factorial: (n: integer) -> (integer)
-if n <= 1
-return 1
-end
-return n * factorial(n - 1)
+    if n <= 1
+        return 1
+    end
+    return n * factorial(n - 1)
 end
 ```
 This is a recursive pure function.
@@ -197,15 +197,14 @@ Multiplies the return value of factorial(n - 1) by n. Since the last operation b
 
 ```
 function factorial: (n: integer, acc: integer) -> (integer)
-if n = 1
-return acc
-end
-return factorial(n - 1, acc * n)
-
+    if n = 1
+        return acc
+    end
+    return factorial(n - 1, acc * n)
 end
 
 function factorial: (n: integer) -> (integer)
-return factorial(n, 1)
+    return factorial(n, 1)
 end
 ```
 This is a pure function that uses tail recursion for speed.
@@ -216,13 +215,13 @@ The only time tail recursion, even if it's difficult to understand, is when muta
 
 ```
 function factorial: (n: integer) -> (integer) 
-if n <= 1 
-return 1 
-end 
-acc: integer = 1 
-foreach i in [1, n] 
-acc = acc * i 
-end 
-return acc
+    if n <= 1 
+        return 1 
+    end 
+    acc: integer = 1 
+    foreach i in [1, n] 
+        acc = acc * i 
+    end 
+    return acc
 end
 ```
